@@ -1,0 +1,27 @@
+name: "PR Checker"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout your code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -f Dockerfile -t pr_checker . --no-cache
+
+      # Step 3: Run commands inside the built container
+      - name: Run script inside container
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            pr_checker \
+            bash -c "echo 'Running script...'; ./pr_checker.sh"
