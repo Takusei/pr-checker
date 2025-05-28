@@ -19,5 +19,7 @@ jobs:
 
       # Step 3: Run commands inside the built container
       - name: Run script inside container
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker run --rm pr_checker bash -c "/home/src/pr_checker.sh"
+          docker run --rm -e GH_TOKEN=$GH_TOKEN pr_checker bash -c "/home/src/pr_checker.sh"
