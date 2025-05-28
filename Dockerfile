@@ -16,5 +16,5 @@ RUN curl -L0 https://github.com/cli/cli/releases/latest/download/gh_2.73.0_linux
 
 WORKDIR /home/src
 COPY ./pr_checker.sh /home/src/pr_checker.sh
-RUN chmod +x /home/src/pr_checker.sh
+RUN chmod +x pr_checker.sh
 
