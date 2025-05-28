@@ -20,8 +20,4 @@ jobs:
       # Step 3: Run commands inside the built container
       - name: Run script inside container
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/workspace \
-            -w /workspace \
-            pr_checker \
-            bash -c "echo 'Running script...'; ./pr_checker.sh"
+          docker run --rm pr_checker bash -c "/home/src/pr_checker.sh"
